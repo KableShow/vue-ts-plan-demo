@@ -1,8 +1,5 @@
 import Vue, { AsyncComponent } from 'vue'
 import Router, { RouteConfig, Route, NavigationGuard } from 'vue-router'
-// import HelloWorld from '@/components/HelloWorld'
-
-const HelloWorld: AsyncComponent = (): any => import('@/components/HelloWorld.vue')
 const List: AsyncComponent = (): any => import('@/components/List.vue')
 const Edit: AsyncComponent = (): any => import('@/components/Edit.vue')
 
@@ -18,11 +15,6 @@ const routes: RouteConfig[] = [
     path: '/edit',
     name: 'Edit',
     component: Edit
-  },
-  {
-    path: '/hello',
-    name: 'HelloWorld',
-    component: HelloWorld
   }
 ]
 
