@@ -7,9 +7,9 @@
     <div class="time-wrap">
       <p class="title">时间</p>
       <div class="time-control">
-        <div @click="openPicker('start')">{{ timeGroup.start || '开始' }}</div>
+        <div @click="openPicker('start', timeGroup.start)">{{ timeGroup.start || '开始' }}</div>
         <p>&nbsp;-&nbsp;</p>
-        <div @click="openPicker('end')">{{ timeGroup.end || '结束' }}</div>
+        <div @click="openPicker('end', timeGroup.end)">{{ timeGroup.end || '结束' }}</div>
       </div>
     </div>
     <div class="workplace-wrap">
@@ -74,7 +74,8 @@
     <mt-datetime-picker
       ref="picker"
       type="time"
-      v-model="timeGroup[currentTime]">
+      @confirm="confirmTime"
+      v-model="currentTimeModel">
     </mt-datetime-picker>
     <mt-popup
       class="localPicker"
@@ -97,6 +98,7 @@
   const { ModuleGetter, ModuleMutation } = spreadName('plan')
 
   interface PickerTime {
+    [index: string]: string
     start: string
     end: string
   }
@@ -109,6 +111,7 @@
     @ModuleMutation setDetailList: (list: Work.PlanDetail[]) => void
     currentLocation: string = 'K001'
     currentTime: string = 'start'
+    currentTimeModel: string = ''
     timeGroup: PickerTime = {
       start: '',
       end: ''
@@ -159,13 +162,17 @@
       locationDesc: '',
       remark: ''
     })
-
     backRouter (): void {
       this.$router.back()
     }
-    openPicker (tag: string) {
+    confirmTime (value: string): void {
+      let currentTime: string = this.currentTime
+      this.timeGroup[currentTime.toString()] = value
+    }
+    openPicker (tag: string, model: string): void {
       let picker: any = this.$refs.picker
       this.currentTime = tag
+      this.currentTimeModel = model
       picker.open()
     }
     changeTab (tab: string): void {
