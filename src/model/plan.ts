@@ -22,7 +22,7 @@ export class Store implements Work.Remark, Work.Location {
     this.taskGroup = taskGroup || []
     this.order = order || defaultOrder
     this.remark = remark || ''
-    this.orderCover = orderCover || true
+    this.orderCover = orderCover !== undefined ? orderCover : true
   }
 }
 

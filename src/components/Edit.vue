@@ -98,7 +98,7 @@
   const { ModuleGetter, ModuleMutation } = spreadName('plan')
 
   interface PickerTime {
-    [index: string]: string
+    [index: string]: string    // 可索引的类型
     start: string
     end: string
   }
