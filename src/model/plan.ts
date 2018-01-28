@@ -18,7 +18,7 @@ export class Store implements Work.Remark, Work.Location {
       amount: 0
     }
     this.locationCode = locationCode || ''
-    this.locationDesc = locationDesc || ''
+    this.locationDesc = locationDesc || '请选择'
     this.taskGroup = taskGroup || []
     this.order = order || defaultOrder
     this.remark = remark || ''
@@ -38,7 +38,7 @@ export class Office implements Work.Remark, Work.Location {
     remark
   }: any) {
     this.locationCode = locationCode || ''
-    this.locationDesc = locationDesc || ''
+    this.locationDesc = locationDesc || '请选择'
     this.taskGroup = taskGroup || []
     this.remark = remark || ''
   }
@@ -54,7 +54,7 @@ export class Agency implements Work.Remark, Work.Location {
     remark
   }: any) {
     this.locationCode = locationCode || ''
-    this.locationDesc = locationDesc || ''
+    this.locationDesc = locationDesc || '请选择'
     this.remark = remark || ''
   }
 }

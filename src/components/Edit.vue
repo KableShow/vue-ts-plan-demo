@@ -91,7 +91,7 @@
   import Component from 'vue-class-component'
   import * as DATA from '@/data/plan'
   import * as Plan from '@/model/plan'
-  import { Toast } from 'mint-ui'
+  import { Toast, MessageBox } from 'mint-ui'
   import spreadName from '@/utils/vuexHelper'
   import moment from 'moment'
 
@@ -175,8 +175,82 @@
       this.currentTimeModel = model
       picker.open()
     }
+    isDiff (): boolean {
+      let locationStr: string = this.currentLocation
+      let tmp: any
+      switch (locationStr) {
+        case 'K001':
+          let storeTask: any = this.store.taskGroup.map(e => {
+            let tmp: any = Object.assign({}, e)
+            tmp.chosen = false
+            return tmp
+          })
+          tmp = JSON.stringify(new Plan.Store({ taskGroup: storeTask }))
+          if (tmp !== JSON.stringify(this.store)) {
+            return true
+          } else {
+            return false
+          }
+        case 'K002':
+          let officeTask: any = this.office.taskGroup.map(e => {
+            let tmp: any = Object.assign({}, e)
+            tmp.chosen = false
+            return tmp
+          })
+          tmp = JSON.stringify(new Plan.Office({ taskGroup: officeTask }))
+          if (tmp !== JSON.stringify(this.office)) {
+            return true
+          } else {
+            return false
+          }
+        case 'K003':
+          tmp = JSON.stringify(new Plan.Agency({}))
+          if (tmp !== JSON.stringify(this.agency)) {
+            return true
+          } else {
+            return false
+          }
+        default:
+          break
+      }
+      return true
+    }
     changeTab (tab: string): void {
-      this.currentLocation = tab
+      if (this.currentLocation !== tab) {
+        if (this.isDiff()) {
+          MessageBox.confirm('切换地点将清空原先数据，是否确定切换？').then(() => {
+            switch (this.currentLocation) {
+              case 'K001':
+                let storeTask: any = this.store.taskGroup.map(e => {
+                  let tmp: any = Object.assign({}, e)
+                  tmp.chosen = false
+                  return tmp
+                })
+                this.store = new Plan.Store({ taskGroup: storeTask })
+                break
+              case 'K002':
+                let officeTask: any = this.office.taskGroup.map(e => {
+                  let tmp: any = Object.assign({}, e)
+                  tmp.chosen = false
+                  return tmp
+                })
+                this.office = new Plan.Office({ taskGroup: officeTask })
+                break
+              case 'K003':
+                this.agency = new Plan.Agency({})
+                break
+              default:
+                break
+            }
+            let location: any = Object.assign({}, this.locationGroup[this.currentLocation][0])
+            location.defaultIndex = 0
+            this.locationGroup[this.currentLocation] = [].concat(location)
+            this.currentLocation = tab
+          })
+        } else {
+          this.currentLocation = tab
+        }
+      }
     }
     toggleTask (location: Plan.Store | Plan.Office, index: number) {
       let tmp = location.taskGroup[index]
