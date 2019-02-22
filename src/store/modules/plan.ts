@@ -1,3 +1,5 @@
+import * as Work from '@/typings/plan.d.ts'
+
 interface State {
   planList: Work.Plan[]
   currentStatus: string

@@ -36,6 +36,7 @@
   import { Model, Prop, Watch } from 'vue-property-decorator'
   import spreadName from '@/utils/vuexHelper'
   import moment from 'moment'
+  import * as Work from '@/typings/plan.d.ts'
 
   const { ModuleGetter, ModuleMutation } = spreadName('plan')
 

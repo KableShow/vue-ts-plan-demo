@@ -1,3 +1,5 @@
+import * as Work from '@/typings/plan.d.ts'
+
 export class Store implements Work.Remark, Work.Location {
   locationCode: string
   locationDesc: string
