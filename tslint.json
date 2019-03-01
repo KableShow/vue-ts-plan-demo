@@ -1,0 +1,29 @@
+{
+  "defaultSeverity": "warning",
+  "extends": [
+    "tslint:recommended"
+  ],
+  "linterOptions": {
+    "exclude": [
+      "node_modules/**"
+    ]
+  },
+  "rules": {
+    "quotemark": [true, "single"],
+    "indent": [true, "spaces", 2],
+    "interface-name": false,
+    "ordered-imports": false,
+    "object-literal-sort-keys": false,
+    "no-consecutive-blank-lines": false,
+    // 自行添加的
+    "trailing-comma": false,
+    "semicolon": false,  // 分号
+    "space-before-function-paren": false,  // Spaces before function parens are disallowed，函数括号前不允许空格
+    "no-shadowed-variable": false,    // 可以使用相同的变量名
+    "max-classes-per-file": false,    // 每个文件最多只能export几个类
+    "object-literal-key-quotes": false,   // 对象属性不用引号
+    "no-string-literal": false,    // 对象属性直接引用字符串，而不是变量
+    "curly": false,   // if, while等必须加大括号，if(){ return true }
+    "prefer-const": false     // 那些可以用const但是没用const的地方都会提示你
+  }
+}
