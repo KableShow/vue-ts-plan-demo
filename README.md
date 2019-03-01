@@ -1,6 +1,9 @@
 # typescript3
 
+	一个简易的vue项目Demo，使用了Typescript。(vue cli3模版创建)
+
 ## Project setup
+
 ```
 npm install
 ```
