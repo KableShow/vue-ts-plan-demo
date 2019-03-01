@@ -1,6 +1,6 @@
 # vue-typescript-plan-demo
 
-> 一个简易的vue项目Demo，使用了Typescript。
+> 一个简易的vue项目Demo，使用了Typescript。(非vue cli3模版创建)
 
 ## Build Setup
 
